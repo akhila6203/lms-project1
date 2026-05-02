@@ -163,7 +163,7 @@ export default function MyLearningPage() {
               <img src={c.thumbnail} alt={c.title} className="h-28 sm:h-32 w-full object-cover" />
               <div className="p-3">
                 <p className="text-sm font-medium line-clamp-2">{c.title}</p>
-                <Button className="text-xs sm:text-sm" variant="outline" className="mt-2" onClick={() => navigate(`/courses/${c.id}`, { state: { from: "/my-learning" } })}>
+                <Button className="text-xs sm:text-sm" variant="outline"  onClick={() => navigate(`/courses/${c.id}`, { state: { from: "/my-learning" } })}>
                   View course
                 </Button>
               </div>
