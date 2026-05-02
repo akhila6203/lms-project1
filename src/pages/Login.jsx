@@ -1,0 +1,258 @@
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import login from "../assets/photos/login.jpg";
+import { FaEnvelope, FaLock } from "react-icons/fa";
+
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+if (!validate()) return;
+
+  if (isAdminEmail(email)) {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ name: "Admin", email, role: "admin" })
+    );
+  } else {
+    const name = email.split("@")[0].replace(/[._-]+/g, " ");
+    localStorage.setItem(
+    "user",
+    JSON.stringify({
+      name: name.replace(/\b\w/g, (char) => char.toUpperCase()) || "User",
+      email,
+      role: "user",
+    })
+  );
+  }
+
+  localStorage.removeItem("user_profile");
+  const params = new URLSearchParams(location.search);
+  const redirect = params.get("redirect");
+  navigate(redirect || "/dashboard"); // ✅ return to requested page if present
+};
+
+const validate = () => {
+  let newErrors = {};
+
+  // EMAIL
+  if (!email) {
+    newErrors.email = "Email is required";
+  } else if (email !== email.toLowerCase()) {
+    newErrors.email = "Only lowercase allowed";
+  } else if (!email.endsWith("@gmail.com")) {
+    newErrors.email = "Must be a gmail.com email";
+  }
+
+  // PASSWORD
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+  if (!password) {
+    newErrors.password = "Password is required";
+  } else if (!passwordRegex.test(password)) {
+    newErrors.password =
+      "Min 8 chars, 1 uppercase, 1 lowercase, 1 number & 1 special char";
+  }
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
+const isAdminEmail = (candidateEmail) => {
+  const normalized = candidateEmail.trim().toLowerCase();
+  const adminUsers = JSON.parse(localStorage.getItem("admin_users") || "[]");
+  const importedList = adminUsers.map((u) =>
+    typeof u === "string" ? u.toLowerCase() : String(u?.email || "").toLowerCase()
+  );
+  return normalized === "admin@gmail.com" || importedList.includes(normalized);
+};
+
+  return (
+    <div className="h-screen flex overflow-hidden bg-gray-100">
+
+      {/* 🔥 LEFT SIDE IMAGE */}
+      <div className="w-[1100px] relative overflow-hidden">
+
+        {/* IMAGE (shifted right for cross effect) */}
+        <img
+          src={login}
+          className="w-[120%] h-full object-cover translate-x-[1%]"
+        />
+
+        {/* 🔥 GRADIENT OVERLAY (REFERENCE STYLE) */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/60 via-green-500/50 to-blue-400/40"></div>
+
+        {/* 🔥 TEXT */}
+        <div className="absolute top-[56%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-20">
+  <div className="max-w-md text-center">
+
+    <h1 className="text-4xl font-bold leading-snug drop-shadow-xl">
+      Learning today <br /> leading tomorrow.
+    </h1>
+
+    <p className="text-sm mt-4 opacity-95 drop-shadow-md">
+      “Small steps today, big success tomorrow.”
+    </p>
+
+  </div>
+</div>
+
+      </div>
+
+      {/* 🔥 RIGHT SIDE FORM */}
+      <div className="w-1/2 flex items-center justify-center relative z-20 bg-gray-100">
+
+        <div className="w-[360px]">
+
+          <h2 className="text-2xl font-semibold text-center mb-2">
+            Sign In
+          </h2>
+
+          <p className="text-center text-gray-400 text-sm mb-6">
+            Sign in with your assigned email and password
+          </p>
+
+          <form onSubmit={handleLogin}>
+
+           <label className="text-sm text-gray-600">User Name</label>
+
+<div className="relative">
+  <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+
+  <input
+    type="email"
+    placeholder="Enter your email"
+    className={`w-full pl-10 mt-1 mb-1 px-4 py-2 rounded-full outline-none focus:ring-2
+      ${errors.email 
+        ? "border border-red-500 bg-red-50 focus:ring-red-400"
+        : "bg-gray-200 focus:ring-blue-400"
+      }`}
+    value={email}
+    onChange={(e) => setEmail(e.target.value.toLowerCase())}
+  />
+</div>
+
+{errors.email && (
+  <p className="text-red-500 text-xs mb-2">{errors.email}</p>
+)}
+
+            {/* PASSWORD */}
+            <label className="text-sm text-gray-600">Password</label>
+
+<div className="relative">
+  <FaLock className="absolute left-3 top-3 text-gray-400" />
+
+  <input
+    type={show ? "text" : "password"}
+    placeholder="Enter password"
+    className={`w-full pl-10 pr-10 mt-1 mb-1 px-4 py-2 rounded-full outline-none focus:ring-2
+      ${errors.password 
+        ? "border border-red-500 bg-red-50 focus:ring-red-400"
+        : "bg-gray-200 focus:ring-blue-400"
+      }`}
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+
+  <span
+    onClick={() => setShow(!show)}
+    className="absolute right-4 top-3 cursor-pointer text-gray-500"
+  >
+    {show ? <FaEyeSlash /> : <FaEye />}
+  </span>
+</div>
+
+{errors.password && (
+  <p className="text-red-500 text-xs mb-2">{errors.password}</p>
+)}
+            {/* FORGOT */}
+            <p className="text-xs text-right text-green-500 mb-4 cursor-pointer">
+              Forgot password?
+            </p>
+
+            {/* LOGIN BUTTON */}
+            <button className="w-full py-2 rounded-full text-white font-medium bg-gradient-to-r from-blue-500 to-green-500 hover:scale-105 transition shadow-lg">
+              Login
+            </button>
+
+          </form>
+
+          <p className="mt-4 text-center text-xs text-gray-500">
+            Google sign-in is disabled for this admin panel.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+
+// export default function Login() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   const navigate = useNavigate();
+
+//   const handleLogin = (e) => {
+//     e.preventDefault();
+
+//     if (email.trim() === "admin@gmail.com") {
+//       localStorage.setItem(
+//         "user",
+//         JSON.stringify({ name: "Admin", role: "admin" })
+//       );
+//     } else {
+//       localStorage.setItem(
+//         "user",
+//         JSON.stringify({ name: "User", role: "user" })
+//       );
+//     }
+
+//     navigate("/dashboard"); // ✅ SINGLE ROUTE
+//   };
+
+//   return (
+//     <div className="h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 to-blue-500">
+//       <form
+//         onSubmit={handleLogin}
+//         className="bg-white p-8 rounded-xl shadow-lg w-80"
+//       >
+//         <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
+
+//         <input
+//           className="w-full border p-2 mb-3 rounded"
+//           placeholder="Email"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//         />
+
+//         <input
+//           className="w-full border p-2 mb-4 rounded"
+//           type="password"
+//           placeholder="Password"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//         />
+
+//         <button className="w-full bg-purple-600 text-white py-2 rounded">
+//           Login
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
