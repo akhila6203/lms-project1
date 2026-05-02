@@ -128,13 +128,13 @@ const isAdminEmail = (candidateEmail) => {
 
            <label className="text-sm text-gray-600">User Name</label>
 
-            <div className="relative">
-              <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+            <div className="flex items-center bg-gray-200 rounded-full px-3 mt-1 mb-1">
+              <FaEnvelope className="text-gray-400 text-sm mr-2" />
 
               <input
                 type="email"
                 placeholder="Enter your email"
-                className={`w-full pl-10 mt-1 mb-1 px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base
+                className={`w-full bg-transparent outline-none text-sm sm:text-base py-2.5
                   ${errors.email 
                     ? "border border-red-500 bg-red-50 focus:ring-red-400"
                     : "bg-gray-200 focus:ring-blue-400"
@@ -150,13 +150,13 @@ const isAdminEmail = (candidateEmail) => {
 
             {/* PASSWORD */}
             <label className="text-sm text-gray-600">Password</label>
-              <div className="relative">
-                <FaLock className="absolute left-3 top-3 text-gray-400" />
+              <div className="flex items-center bg-gray-200 rounded-full px-3 mt-1 mb-1">
+                <FaLock className="text-gray-400 text-sm mr-2" />
 
                 <input
                   type={show ? "text" : "password"}
                   placeholder="Enter password"
-                  className={`w-full pl-10 mt-1 mb-1 px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base
+                  className={`w-full bg-transparent outline-none text-sm sm:text-base py-2.5
                     ${errors.password 
                       ? "border border-red-500 bg-red-50 focus:ring-red-400"
                       : "bg-gray-200 focus:ring-blue-400"
@@ -167,7 +167,7 @@ const isAdminEmail = (candidateEmail) => {
 
                 <span
                   onClick={() => setShow(!show)}
-                  className="absolute right-4 top-3 cursor-pointer text-gray-500"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
                 >
                   {show ? <FaEyeSlash /> : <FaEye />}
                 </span>
@@ -198,62 +198,3 @@ const isAdminEmail = (candidateEmail) => {
   );
 }
 
-
-
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-
-// export default function Login() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const navigate = useNavigate();
-
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-
-//     if (email.trim() === "admin@gmail.com") {
-//       localStorage.setItem(
-//         "user",
-//         JSON.stringify({ name: "Admin", role: "admin" })
-//       );
-//     } else {
-//       localStorage.setItem(
-//         "user",
-//         JSON.stringify({ name: "User", role: "user" })
-//       );
-//     }
-
-//     navigate("/dashboard"); // ✅ SINGLE ROUTE
-//   };
-
-//   return (
-//     <div className="h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 to-blue-500">
-//       <form
-//         onSubmit={handleLogin}
-//         className="bg-white p-8 rounded-xl shadow-lg w-80"
-//       >
-//         <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
-
-//         <input
-//           className="w-full border p-2 mb-3 rounded"
-//           placeholder="Email"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-
-//         <input
-//           className="w-full border p-2 mb-4 rounded"
-//           type="password"
-//           placeholder="Password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <button className="w-full bg-purple-600 text-white py-2 rounded">
-//           Login
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
