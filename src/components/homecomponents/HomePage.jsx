@@ -43,7 +43,7 @@ const isLoggedIn = user && user.role !== "admin";
   const visibleCourses = filtered.slice(0, visibleCount);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground px-4 sm:px-6 lg:px-8">
 
       {/* HERO */}
       <section className="relative overflow-hidden">
@@ -51,7 +51,7 @@ const isLoggedIn = user && user.role !== "admin";
         {/* BACKGROUND */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800" />
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 px-6 py-20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-12 sm:py-16 lg:py-20">
 
           {/* LEFT */}
           <div>
@@ -60,7 +60,7 @@ const isLoggedIn = user && user.role !== "admin";
               New: AI for Builders course is live
             </div>
 
-            <h1 className="mt-6 text-5xl font-bold leading-tight text-foreground">
+            <h1 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
               Learning today,
               <br />
               <span className="text-purple-600">
@@ -148,7 +148,7 @@ const isLoggedIn = user && user.role !== "admin";
 
       {/* FEATURES */}
       <section className="border-y bg-secondary/40 py-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-4 gap-6 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {features.map((f)=>(
             <div key={f.title} className="flex gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-card shadow">
@@ -164,7 +164,7 @@ const isLoggedIn = user && user.role !== "admin";
       </section>
 
       {/* COURSES */}
-      <section id="courses" className="max-w-7xl mx-auto px-6 py-16">
+      <section id="courses" className="max-w-7xl mx-auto py-12 sm:py-16">
 
         <div className="flex justify-between items-end">
           <div>
@@ -178,7 +178,7 @@ const isLoggedIn = user && user.role !== "admin";
         </div>
 
         {/* CATEGORY TABS */}
-        <div className="flex gap-3 mt-6 border-b pb-2">
+        <div className="flex gap-3 mt-6 border-b pb-2 overflow-x-auto">
           {CATEGORIES.map((c)=>(
             <button
               key={c}
@@ -198,7 +198,7 @@ const isLoggedIn = user && user.role !== "admin";
         </div>
 
         {/* GRID */}
-        <div className="grid grid-cols-4 gap-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {visibleCourses.map((c)=>(
             <CourseCard key={c.id} course={c} />
           ))}
@@ -234,7 +234,7 @@ const isLoggedIn = user && user.role !== "admin";
     </div>
 
     {/* CARDS */}
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 
       {reviews.map((r) => (
         <div

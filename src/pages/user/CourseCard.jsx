@@ -23,7 +23,7 @@ export function CourseCard({ course }) {
   return (
     <Card className="h-full overflow-hidden rounded-2xl border-0 bg-white p-0 shadow-sm ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-lg">
       <Link to={`/courses/${course.id}`} state={{ from }} className="block group">
-        <div className="relative h-36 overflow-hidden">
+        <div className="relative h-32 sm:h-36 overflow-hidden">
             {/* IMAGE OR GRADIENT */}
             {course.thumbnail ? (
               <img
@@ -68,23 +68,23 @@ export function CourseCard({ course }) {
             {course.level}
           </Badge>
         </div> */}
-        <div className="p-4 space-y-2">
+        <div className="p-3 sm:p-4 space-y-2">
           <p className="text-xs text-muted-foreground">
             {course.category}
           </p>
 
-          <h3 className="font-semibold leading-tight line-clamp-2 group-hover:text-primary transition">
+          <h3 className="text-sm sm:text-base font-semibold leading-tight line-clamp-2 group-hover:text-primary transition">
             {course.title}
           </h3>
-          <p className="text-xs text-muted-foreground line-clamp-1">
+          <p className="text-[11px] sm:text-xs text-muted-foreground line-clamp-1">
             {course.description}
           </p>
 
           <p className="text-xs text-muted-foreground">
             {/* By {course.instructor} */}
             <p className="text-xs text-muted-foreground">
-  By {course.instructor || "Unknown"}
-</p>
+              By {course.instructor || "Unknown"}
+            </p>
           </p>
 
           {/* RATING */}
@@ -103,7 +103,7 @@ export function CourseCard({ course }) {
           </div>
 
           {/* META */}
-          <div className="flex items-center gap-3 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] sm:text-xs">
             <span className="inline-flex items-center gap-1">
               <Clock className="h-3.5 w-3.5" />
               {/* {course.hours}h */}

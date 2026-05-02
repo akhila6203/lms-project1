@@ -50,7 +50,7 @@ export default function PublicCoursePage({ courseOverride = null }) {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen px-24 py-6">
+    <div className="bg-gray-100 min-h-screen px-4 sm:px-6 lg:px-24 py-4 sm:py-6">
 
       {/* BACK */}
       <button
@@ -60,8 +60,7 @@ export default function PublicCoursePage({ courseOverride = null }) {
         <ArrowLeft className="h-4 w-4" /> Back to home
       </button>
 
-      {/* <div className="grid lg:grid-cols-[1fr_350px] gap-16"> */}
-      <div className="grid gap-6 grid-cols-1 lg:grid-cols-[1.3fr_1fr]">
+     <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-[1.3fr_1fr]">
 
         {/* LEFT */}
         <div className="space-y-6 ">
@@ -73,12 +72,11 @@ export default function PublicCoursePage({ courseOverride = null }) {
               title={course.videos?.[0]?.title || lessons[0].title}
               subtitle={course.videos?.[0]?.duration || lessons[0].duration}
               badge="Free preview"
-              // className="h-[480px]"
             />
           </div>
 
           {/* DEMO BOX */}
-          <div className="flex justify-between items-center bg-purple-50 border border-purple-200 p-4 rounded-xl">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 bg-purple-50 border border-purple-200 p-4 rounded-xl">
             <div className="flex gap-3">
               <Lock className="text-purple-600" />
               <div>
@@ -110,7 +108,7 @@ export default function PublicCoursePage({ courseOverride = null }) {
               </span>
             </div>
 
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
               {course.title}
             </h1>
 
@@ -118,7 +116,7 @@ export default function PublicCoursePage({ courseOverride = null }) {
               {course.description}
             </p>
 
-            <div className="flex gap-4 mt-3 text-sm text-gray-600">
+            <div className="flex flex-wrap gap-3 mt-3 text-xs sm:text-sm text-gray-600">
               <span className="flex items-center gap-1">
                 <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                 {course.rating} ({course.reviews})
@@ -141,7 +139,7 @@ export default function PublicCoursePage({ courseOverride = null }) {
           </div>
 
           {/* TABS */}
-          <div className="flex gap-2 bg-gray-200 p-1 rounded-xl w-fit">
+          <div className="flex gap-2 bg-gray-200 p-1 rounded-xl w-full overflow-x-auto">
             {/* OVERVIEW */}
             <button
                 onClick={() => setTab("overview")}
@@ -198,7 +196,7 @@ export default function PublicCoursePage({ courseOverride = null }) {
 
                 <h3 className="font-semibold mb-4">What you'll learn</h3>
 
-                <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-sm">
 
                 <p className="flex gap-2 items-start">
                     <Check className="text-green-500 mt-1" />
@@ -315,7 +313,7 @@ export default function PublicCoursePage({ courseOverride = null }) {
 
 
         {/* RIGHT SIDEBAR */}
-        <div className="space-y-4">
+        <div className="space-y-4 mt-4 lg:mt-0">
 
           {/* CONTINUE */}
           <div className="bg-white p-5 rounded-xl shadow">
@@ -342,7 +340,7 @@ export default function PublicCoursePage({ courseOverride = null }) {
             {lessons.map((l, i) => (
               <div
                 key={l.id}
-                className="flex justify-between items-center p-4 border-b text-sm"
+                className="flex justify-between items-start sm:items-center gap-2 p-4 border-b text-xs sm:text-sm"
               >
                 <div className="flex gap-2 items-center">
                   {l.free ? (

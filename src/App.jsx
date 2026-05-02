@@ -22,7 +22,7 @@ import AdminSettings from "@/pages/admin/Settings";
 // USER
 import UserDashboard from "@/pages/user/Dashboard";
 import UserCourses from "@/pages/user/Courses";
-import MyMaterials from "@/pages/user/MyMaterials";
+// import MyMaterials from "@/pages/user/MyMaterials";
 import UserSettings from "@/pages/user/Settings";
 import UserDevelopment from "@/pages/user/Development";
 
@@ -167,9 +167,13 @@ const App = () => {
                   {/* <Route path="/my-learning" element={<MyLearningPage />} /> */}
 
                   {/* MATERIALS */}
-                  <Route
+                  {/* <Route
                     path="/materials"
                     element={<RoleRoute adminElement={<Materials />} userElement={<MyMaterials />} />}
+                  /> */}
+                  <Route
+                    path="/materials"
+                    element={<RoleRoute adminElement={<Materials />}  />}
                   />
 
                   {/* SETTINGS */}

@@ -89,7 +89,7 @@ export default function CourseViewPage() {
   const progress = Math.round((completed / lessonCount) * 100);
 
   return (
-    <div className="space-y-5 px-6 py-2 md:px-10">
+    <div className="space-y-5 sm:space-y-6  sm:px-6 md:px-10 py-1 sm:py-4">
 
       <Button variant="ghost" size="sm" onClick={() => navigate(from)}>
         <ArrowLeft className="h-4 w-4" /> {backLabel}
@@ -97,43 +97,8 @@ export default function CourseViewPage() {
       <p className="text-sm text-muted-foreground">
           Home / {course.category} / {course.title}
         </p>
-      {/* <div className="rounded-[28px] bg-card p-6 shadow-sm ring-1 ring-black/5">
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="secondary">{course.category}</Badge>
-          <Badge variant="outline">{course.level}</Badge>
-          {course.tag && <Badge>{course.tag}</Badge>}
-        </div>
 
-        <h1 className="mt-3 text-3xl font-semibold text-foreground">
-          {course.title}
-        </h1>
-
-        <p className="mt-3 max-w-4xl text-sm text-muted-foreground">
-          {course.description}
-        </p>
-
-        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
-          <span className="flex items-center gap-1">
-            <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-            {course.rating}
-          </span>
-          <span className="text-muted-foreground">
-            {course.reviews.toLocaleString()} ratings
-          </span>
-          <span className="flex items-center gap-1">
-            <Clock className="h-4 w-4" /> {course.hours}h total
-          </span>
-          <span className="flex items-center gap-1">
-            <BookOpen className="h-4 w-4" /> {course.lessons} lessons
-          </span>
-          <span className="text-muted-foreground">
-            By <span className="font-medium text-foreground">{course.instructor}</span>
-          </span>
-        </div>
-      </div> */}
-
-      {/* <div className="grid gap-6 lg:grid-cols-[1fr_360px]"> */}
-        <div className="grid gap-6 grid-cols-1 lg:grid-cols-[1.3fr_1fr]">
+       <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-[1.3fr_1fr]">
 
         {/* LEFT */}
         <div className="space-y-5">
@@ -167,17 +132,17 @@ export default function CourseViewPage() {
   </div>
 
   {/* TITLE */}
-  <h1 className="text-2xl font-bold text-gray-900">
+  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
     {course.title}
   </h1>
 
   {/* DESCRIPTION */}
-  <p className="mt-2 text-sm text-gray-500 max-w-4xl">
+  <p className="mt-2 text-sm text-gray-500 max-w-xl sm:max-w-4xl">
     {course.description}
   </p>
 
   {/* STATS */}
-  <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-gray-600">
+  <div className="mt-3 flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600">
     
     <span className="flex items-center gap-1">
       <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
@@ -205,10 +170,10 @@ export default function CourseViewPage() {
 
           {/* TABS */}
           <Tabs defaultValue="overview">
-            <TabsList className="rounded-xl bg-white p-1 shadow-sm ring-1 ring-black/5">
-              <TabsTrigger value="overview" className="rounded-lg">Overview</TabsTrigger>
-              <TabsTrigger value="materials" className="rounded-lg">Materials</TabsTrigger>
-              <TabsTrigger value="quizzes" className="rounded-lg">Quizzes</TabsTrigger>
+            <TabsList className="rounded-xl bg-white p-1 shadow-sm overflow-x-auto flex">
+              <TabsTrigger value="overview" className="rounded-lg text-xs sm:text-sm whitespace-nowrap">Overview</TabsTrigger>
+              <TabsTrigger value="materials"className="rounded-lg text-xs sm:text-sm whitespace-nowrap">Materials</TabsTrigger>
+              <TabsTrigger value="quizzes" className="rounded-lg text-xs sm:text-sm whitespace-nowrap">Quizzes</TabsTrigger>
               {/* <TabsTrigger value="reviews" className="rounded-lg">Reviews</TabsTrigger> */}
             </TabsList>
 
@@ -332,7 +297,7 @@ export default function CourseViewPage() {
         </div>
 
         {/* RIGHT */}
-        <aside className="space-y-4">
+        <aside className="space-y-4 mt-4 lg:mt-0">
 
           <Card className="p-5 shadow-sm ring-1 ring-black/5">
             <div className="flex justify-between text-sm mb-2">
@@ -371,7 +336,7 @@ export default function CourseViewPage() {
                       // markLessonViewed(course.id, nextLesson.title || `Lesson ${i + 1}`);
                     }
                   }
-                  className="flex items-center justify-between w-full border-b px-4 py-3 text-left hover:bg-secondary/50 last:border-0"
+                  className="flex items-center justify-between w-full border-b px-3 sm:px-4 py-3 text-left text-sm"
                 >
                   <div className="flex items-center gap-3">
 
@@ -382,7 +347,7 @@ export default function CourseViewPage() {
 
                     {/* TITLE */}
                     <div className="text-left">
-                      <p className="text-sm font-medium">{l.title || `Lesson ${i + 1}`}</p>
+                      <p  className="text-xs sm:text-sm font-medium">{l.title || `Lesson ${i + 1}`}</p>
                       <p className="text-xs text-muted-foreground">{l.duration || "0:00"}</p>
                     </div>
 

@@ -53,20 +53,20 @@ function StudentDashboard() {
   });
 
   return (
-    <div className="space-y-10 px-6 py-3 md:px-10">
+    <div className="space-y-8 sm:space-y-10 px-1 sm:px-6 md:px-10 py-4 sm:py-6">
       <div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-sm font-semibold text-white">
             {(user?.name || "L").slice(0, 2).toUpperCase()}
           </div>
           <div>
-            <p className="text-2xl font-semibold text-slate-900">
+            <p className="text-xl sm:text-2xl font-semibold text-slate-900">
               Welcome back, {user?.name?.split(" ")[0] || "Learner"}
             </p>
             {/* <p className="text-sm text-muted-foreground">{user?.email}</p> */}
           </div>
         </div>
-        <h1 className="mt-8 text-3xl font-semibold tracking-tight text-slate-900">
+        <h1 className="mt-6 sm:mt-8 text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
           What to learn next
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -78,7 +78,7 @@ function StudentDashboard() {
 
       {sections.map((section) => (
         <section key={section.title} className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
               <h2 className="text-2xl font-semibold text-slate-900">{section.title}</h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -92,11 +92,11 @@ function StudentDashboard() {
             </Button>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5">
             {section.items.map((course) => (
               <Link key={course.id} to={`/courses/${course.id}`} state={{ from: "/dashboard" }} className="group">
                 <Card className="overflow-hidden rounded-2xl border-0 bg-white p-0 shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-lg">
-                  <div className="relative h-40 overflow-hidden">
+                  <div className="relative h-36 sm:h-40 overflow-hidden">
                     {course.thumbnail ? (
                       <img src={course.thumbnail} alt={course.title} className="h-full w-full object-cover" />
                     ) : (
@@ -108,16 +108,16 @@ function StudentDashboard() {
                         {course.tag}
                       </Badge>
                     )}
-                    <button className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-900 shadow-sm">
+                    <button className="absolute bottom-3 right-3 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white text-slate-900 shadow-sm">
                       <Play className="h-4 w-4 fill-current" />
                     </button>
                   </div>
 
-                  <div className="space-y-2 p-4">
+                  <div className="space-y-2 p-3 sm:p-4">
                     <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                       {course.category}
                     </p>
-                    <h3 className="line-clamp-2 min-h-[3rem] text-base font-semibold text-slate-900 group-hover:text-primary">
+                    <h3 className="line-clamp-2 min-h-[3rem] text-sm sm:text-base font-semibold text-slate-900 group-hover:text-primary">
                       {course.title}
                     </h3>
                     <p className="text-sm text-muted-foreground">{course.instructor}</p>

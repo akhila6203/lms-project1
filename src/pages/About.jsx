@@ -28,14 +28,14 @@ const values = [
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-background px-6 py-12">
+    <div className="min-h-screen bg-background px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
       <div className="mx-auto max-w-6xl space-y-10">
         <section className="rounded-3xl bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 px-8 py-14 text-white shadow-xl">
           <div className="max-w-3xl">
             <p className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-medium">
               <Sparkles className="h-4 w-4" /> About LMS
             </p>
-            <h1 className="mt-4 text-4xl font-bold">Building better careers through focused learning.</h1>
+            <h1 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold">Building better careers through focused learning.</h1>
             <p className="mt-4 text-sm text-white/90">
               LMS helps students and professionals gain modern skills through structured content, guided practice,
               and measurable progress.
@@ -43,9 +43,9 @@ export default function About() {
           </div>
         </section>
 
-        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {stats.map((item) => (
-            <div key={item.label} className="rounded-2xl border bg-card p-5 shadow-sm">
+            <div key={item.label} className="rounded-2xl border bg-card p-4 sm:p-5 shadow-sm">
               <p className="text-3xl font-bold text-foreground">{item.value}</p>
               <p className="mt-1 text-sm text-muted-foreground">{item.label}</p>
             </div>
@@ -62,15 +62,19 @@ export default function About() {
         </section>
 
         <section className="grid gap-5 md:grid-cols-3">
-          {values.map((item) => (
-            <div key={item.title} className="rounded-2xl border bg-card p-6 shadow-sm">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-100 text-violet-700">
-                <item.icon className="h-5 w-5" />
+          {values.map((item) => {
+            const Icon = item.icon;   // ✅ ADD THIS LINE
+
+            return (
+              <div key={item.title} className="rounded-2xl border bg-card p-6 shadow-sm">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-100 text-violet-700">
+                  <Icon className="h-5 w-5" />   {/* ✅ CHANGE HERE */}
+                </div>
+                <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
               </div>
-              <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
-            </div>
-          ))}
+            );
+          })}
         </section>
       </div>
       <Footer/>

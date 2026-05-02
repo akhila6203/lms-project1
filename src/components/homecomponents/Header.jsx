@@ -80,6 +80,8 @@ export default function Header() {
   const user = JSON.parse(localStorage.getItem("user"));
   const isAdmin = user?.role === "admin";
 
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
+
   const profile = getProfile();
   const avatarSrc = profile?.avatar || "";
   const nameText = profile?.fullName || user?.name || "Learner";
@@ -101,8 +103,8 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 w-full z-10 border-b bg-card/95 shadow-sm backdrop-blur">
       
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
-
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
+    
         {/* LOGO */}
         <h1
           onClick={() => navigate("/")}
@@ -110,9 +112,11 @@ export default function Header() {
         >
           LMS
         </h1>
+        
 
         {/* SEARCH */}
-        <div className="relative w-1/2">
+      
+         <div className="relative w-full sm:w-40 md:w-80 lg:w-96">
           <div className="flex items-center rounded-lg bg-secondary px-3 py-2 focus-within:ring-2 focus-within:ring-purple-500">
             <Search className="mr-2 h-4 w-4 text-muted-foreground" />
             <input
@@ -144,32 +148,33 @@ export default function Header() {
               )}
             </div>
           )}
-        </div>
+        </div> 
 
         {/* RIGHT */}
-        <div className="flex items-center gap-6">
-          <button onClick={() => navigate("/homecourses")} className="flex items-center gap-1 text-sm font-medium hover:text-primary">
+        <div className="flex items-center gap-1 sm:gap-6">
+           
+          <button onClick={() => navigate("/homecourses")} className="hidden md:flex items-center gap-1 text-sm font-medium">
             <BookOpen className="h-4 w-4" />
             Courses
           </button>
 
-          <Link to="/about" className="text-sm hover:text-primary">
+          <Link to="/about" className="hidden md:block text-sm">
             About
           </Link>
 
           {isAdmin ? null : (
-  <button
-    onClick={() => navigate("/cart")}
-    className="relative flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground hover:bg-secondary"
-  >
-    <ShoppingCart className="h-4 w-4" />
-    {cartCount > 0 && (
-      <span className="absolute top-1 right-1 text-[10px] bg-primary text-white px-1 rounded-full">
-        {cartCount}
-      </span>
-    )}
-  </button>
-)}
+            <button
+              onClick={() => navigate("/cart")}
+              className="hidden relative  h-9 w-9 items-center justify-center rounded-full text-muted-foreground hover:bg-secondary"
+            >
+              <ShoppingCart className="h-4 w-4" />
+              {cartCount > 0 && (
+                <span className="absolute top-1 right-1 text-[10px] bg-primary text-white px-1 rounded-full">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+          )}
 
           <button
             onClick={toggle}
@@ -178,10 +183,17 @@ export default function Header() {
             {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
 
+           <button
+            className="md:hidden flex h-9 w-9 items-center justify-center rounded-full hover:bg-secondary"
+            onClick={() => togglePanel("menu")}
+          >
+            ☰
+          </button>
+
           {!user || isAdmin ? (
             <button
               onClick={() => navigate("/login")}
-              className="bg-gradient-to-r from-purple-600 to-indigo-500 text-white px-4 py-2 rounded-lg text-sm shadow"
+              className="bg-gradient-to-r from-purple-600 to-indigo-500 text-white px-2 py-2 rounded-lg text-sm shadow"
             >
               Login
             </button>
@@ -314,44 +326,55 @@ export default function Header() {
             </div>
           ))}
         </div>
-
+          
         <div className="p-4 border-t border-border mt-auto">
           <button className="w-full h-9 rounded-lg bg-secondary text-sm font-medium text-foreground hover:bg-secondary/80 transition">
             View all notifications
           </button>
         </div>
       </SlidePanel>
+
+      <SlidePanel
+  open={openPanel === "menu"}
+  onClose={closePanel}
+  title="Menu"
+>
+  <div className="p-4 space-y-4">
+
+    <button
+      onClick={() => {
+        navigate("/homecourses");
+        closePanel();
+      }}
+      className="w-full text-left"
+    >
+      Courses
+    </button>
+
+    <button
+      onClick={() => {
+        navigate("/about");
+        closePanel();
+      }}
+      className="w-full text-left"
+    >
+      About
+    </button>
+
+    <button
+      onClick={() => {
+        navigate("/cart");
+        closePanel();
+      }}
+      className="w-full text-left"
+    >
+      Cart
+    </button>
+
+  </div>
+</SlidePanel>
+
+
     </>
   );
 }
-
-// import { Link, useNavigate } from "react-router-dom";
-
-// export default function Header() {
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="flex justify-between items-center px-6 py-3 bg-white shadow">
-//       {/* LEFT */}
-//       <h1 className="text-2xl font-bold text-purple-600">LMS</h1>
-
-//       {/* CENTER */}
-//       <input
-//         placeholder="Search courses..."
-//         className="border px-4 py-2 rounded w-1/2"
-//       />
-
-//       {/* RIGHT */}
-//       <div className="flex gap-14 items-center ">
-//         <Link to="/about">About</Link>
-
-//         <button
-//           onClick={() => navigate("/login")}
-//           className="bg-purple-600 text-white px-4 py-2 rounded"
-//         >
-//           Login
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }

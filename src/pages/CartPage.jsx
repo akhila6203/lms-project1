@@ -23,8 +23,8 @@ export default function CartPage() {
 
   return (
     <Wrapper>
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <h1 className="text-2xl font-bold mb-2"> Billing Page</h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:py-1">
+        <h1 className="text-xl sm:text-2xl font-bold mb-2"> Billing Page</h1>
         {/* ================= STEPPER ================= */}
         <div className="flex items-center justify-center mb-8">
           {["Cart", "Checkout", "Success"].map((label, i) => {
@@ -34,7 +34,7 @@ export default function CartPage() {
               <div key={s} className="flex items-center">
 
                 {/* CIRCLE */}
-                <div className="flex flex-col items-center">
+                <div className="flex items-center justify-start sm:justify-center mb-6 sm:mb-8 overflow-x-auto">
                   <div
                     className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-bold z-10
                     ${
@@ -53,7 +53,7 @@ export default function CartPage() {
 
                 {/* LINE */}
                 {i !== 2 && (
-                  <div className="w-20 h-[2px] bg-gray-300 mx-2 relative top-[-10px]">
+                  <div className="w-10 sm:w-16 md:w-20 h-[2px] bg-gray-300 mx-2 relative top-[-10px]">
                     <div
                       className={`h-full ${
                         step > s ? "bg-green-500" : ""
@@ -68,10 +68,10 @@ export default function CartPage() {
 
         {/* ================= STEP 1 ================= */}
         {step === 1 && (
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
 
             {/* LEFT */}
-            <div className="col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-4">
               <h2 className="text-2xl font-bold">Cart</h2>
 
               {cartItems.length === 0 ? (
@@ -80,11 +80,11 @@ export default function CartPage() {
                 cartItems.map((c) => (
                   <div
                     key={c.id}
-                    className="border p-4 rounded-xl flex gap-4 items-center"
+                    className="border p-3 sm:p-4 rounded-xl flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center"
                   >
                     <img
                       src={c.thumbnail}
-                      className="w-32 h-20 object-cover rounded"
+                      className="w-full sm:w-32 h-32 sm:h-20 object-cover rounded"
                     />
 
                     <div className="flex-1">
@@ -102,7 +102,7 @@ export default function CartPage() {
                       </p>
                     </div>
 
-                    <div className="text-right">
+                    <div className="w-full sm:w-auto text-left sm:text-right">
                       <p className="font-bold">₹ {c.price || 1000}</p>
 
                       <button
@@ -121,7 +121,7 @@ export default function CartPage() {
             </div>
 
             {/* RIGHT */}
-            <div className="border p-4 rounded-xl h-fit space-y-3">
+            <div className="border p-4 rounded-xl h-fit space-y-3 mt-4 lg:mt-0">
               <h3 className="font-semibold text-lg">Price Details</h3>
 
               <div className="flex justify-between text-sm">
@@ -153,7 +153,7 @@ export default function CartPage() {
 
         {/* ================= STEP 2 ================= */}
         {step === 2 && (
-          <div className="max-w-xl mx-auto border p-6 rounded-xl space-y-4">
+          <div className="max-w-xl mx-auto border p-4 sm:p-6 rounded-xl space-y-4">
             <h2 className="text-xl font-bold">Checkout</h2>
 
             <input
@@ -192,7 +192,7 @@ export default function CartPage() {
 
         {/* ================= STEP 3 ================= */}
         {step === 3 && (
-          <div className="h-[60vh] flex flex-col items-center justify-center text-center">
+          <div className="min-h-[50vh] sm:h-[60vh] flex flex-col items-center justify-center px-4 text-center">
             <h2 className="text-3xl font-bold text-green-600">
               🎉 Order Successful!
             </h2>

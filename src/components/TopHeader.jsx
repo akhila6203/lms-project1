@@ -86,11 +86,6 @@ export function TopHeader() {
   };
   const isAdmin = user?.role === "admin";
 
-//   const avatarSrc = profile?.avatar ? profile.avatar : null;
-//   // const avatarSrc = "";
-// const nameText = user?.name || "Learner";
-// const emailText = user?.email || "learner@example.com";
-
 const userData = JSON.parse(localStorage.getItem("user")) || {};
 
 let profile = {};
@@ -148,13 +143,11 @@ if (path.startsWith("/courses/") && path !== "/courses/create") {
   title = "My Learning";
 }
 
-// const title =
-//   routeTitles[location.pathname] || "Dashboard";
 
   return (
     <>
       <header className="sticky top-0 z-30 h-16 bg-card/80 backdrop-blur-md border-b border-border flex items-center justify-between px-6">
-        <div className="flex items-center gap-6 min-w-[180px]">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-[120px]">
           {user?.role !== "admin" ? (
             <button
               onClick={() => navigate("/dashboard")}
@@ -163,7 +156,7 @@ if (path.startsWith("/courses/") && path !== "/courses/create") {
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-black text-white shadow-sm">
                 <Zap className="h-4 w-4" />
               </div>
-              <span className="text-2xl font-bold tracking-tight">LMS</span>
+              <span className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight">LMS</span>
             </button>
           ) : (
             <h1 className="text-xl font-semibold text-foreground">{title}</h1>
@@ -171,8 +164,8 @@ if (path.startsWith("/courses/") && path !== "/courses/create") {
         </div>
         
         {/* Search */}
-          <div className="flex-1 flex justify-center">
-            <div className="relative w-full max-w-2xl flex-1">
+          <div className="flex-1 flex justify-center px-2">
+            <div className="hidden md:block relative w-full max-w-2xl flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
@@ -181,7 +174,7 @@ if (path.startsWith("/courses/") && path !== "/courses/create") {
               />
             </div>
           </div>
-
+        
 
         <div className="flex items-center gap-1.5">
           {user?.role !== "admin" && (
@@ -233,21 +226,21 @@ if (path.startsWith("/courses/") && path !== "/courses/create") {
             <DropdownMenuTrigger asChild>
               <button className="ml-1 rounded-full transition hover:scale-[1.03]">
                 {avatarSrc ? (
-  <img
-    src={avatarSrc}
-    alt="profile"
-    className="h-9 w-9 rounded-full object-cover"
-  />
-) : (
-  <div className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-semibold text-xs">
-    {nameText
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .slice(0, 2)
-      .toUpperCase()}
-  </div>
-)}
+                  <img
+                    src={avatarSrc}
+                    alt="profile"
+                    className="h-9 w-9 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-semibold text-xs">
+                    {nameText
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")
+                      .slice(0, 2)
+                      .toUpperCase()}
+                  </div>
+                  )}
                 {/* {avatarSrc ? (
                   <img
                     src={avatarSrc}
@@ -292,7 +285,10 @@ if (path.startsWith("/courses/") && path !== "/courses/create") {
                     </div>
                   )} */}
                   <div>
-                    <p className="text-sm font-semibold leading-tight">{nameText}</p>
+                    {/* <p className="text-sm font-semibold leading-tight">{nameText}</p> */}
+                    <p className="text-xs sm:text-sm md:text-base font-semibold leading-tight truncate max-w-[100px] sm:max-w-[140px] md:max-w-none">
+                      {nameText}
+                    </p>
                     <p className="text-xs font-normal text-muted-foreground">{emailText}</p>
                   </div>
                 </div>
@@ -386,3 +382,4 @@ if (path.startsWith("/courses/") && path !== "/courses/create") {
     </>
   );
 }
+

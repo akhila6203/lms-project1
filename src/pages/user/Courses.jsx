@@ -83,21 +83,21 @@ function AppCoursesPage() {
   }, [q, cat, activeTab, level, sort, storedCourses]);
 
   return (
-    <div className="space-y-6 px-6 py-3 md:px-10">
+    <div className="space-y-6 sm:space-y-8 px-2 sm:px-6 md:px-10 py-4 sm:py-6">
       <div>
         <p className="text-xs text-muted-foreground">
           {cat === "All" ? "Home / Courses" : `Home / ${cat} / Courses`}
         </p>
-        <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
           {cat === "All" ? "All Courses" : `${cat} Courses`}
         </h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+        <p className="mt-2 max-w-xl sm:max-w-2xl text-sm text-muted-foreground">
           Browse the same style of category page you showed in the reference. Use the navbar or the filters below, and click any course card to open its details page.
         </p>
       </div>
 
       {CATEGORY_TABS[cat]?.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 rounded-2xl border bg-white p-2 shadow-sm">
+        <div className="flex items-center gap-2 overflow-x-auto">
           {CATEGORY_TABS[cat].map((tab) => (
             <Button
               key={tab}
@@ -117,7 +117,7 @@ function AppCoursesPage() {
       {/* SEARCH + FILTER */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
-          <div className="relative max-w-sm flex-1">
+          <div className="relative w-full sm:max-w-sm flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               value={q}
@@ -127,7 +127,7 @@ function AppCoursesPage() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
 
             <Select value={level} onValueChange={setLevel}>
               <SelectTrigger className="w-[140px] rounded-full">
@@ -156,14 +156,14 @@ function AppCoursesPage() {
       </div>
 
       {/* COURSE GRID */}
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
         {list.map((c) => (
           <CourseCard key={c.id} course={c} />
         ))}
 
         {list.length === 0 && (
-          <div className="col-span-full py-16 text-center">
+          <div className="col-span-full py-12 sm:py-16 text-center">
             <FilterIcon className="mx-auto h-8 w-8 text-muted-foreground" />
             <p className="mt-2 text-sm text-muted-foreground">
               No courses match your filters.

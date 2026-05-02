@@ -78,15 +78,17 @@ const isAdminEmail = (candidateEmail) => {
 };
 
   return (
-    <div className="h-screen flex overflow-hidden bg-gray-100">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-gray-100">
 
       {/* 🔥 LEFT SIDE IMAGE */}
-      <div className="w-[1100px] relative overflow-hidden">
+      {/* <div className="w-[1100px] relative overflow-hidden"> */}
+      <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
 
         {/* IMAGE (shifted right for cross effect) */}
         <img
           src={login}
-          className="w-[120%] h-full object-cover translate-x-[1%]"
+          // className="w-[120%] h-full object-cover translate-x-[1%]"
+          className="w-full h-full object-cover"
         />
 
         {/* 🔥 GRADIENT OVERLAY (REFERENCE STYLE) */}
@@ -96,7 +98,7 @@ const isAdminEmail = (candidateEmail) => {
         <div className="absolute top-[56%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-20">
   <div className="max-w-md text-center">
 
-    <h1 className="text-4xl font-bold leading-snug drop-shadow-xl">
+    <h1 className="text-2xl xl:text-4xl font-bold leading-snug drop-shadow-xl">
       Learning today <br /> leading tomorrow.
     </h1>
 
@@ -110,15 +112,15 @@ const isAdminEmail = (candidateEmail) => {
       </div>
 
       {/* 🔥 RIGHT SIDE FORM */}
-      <div className="w-1/2 flex items-center justify-center relative z-20 bg-gray-100">
+      <div className="w-full lg:w-1/2 flex items-center justify-center sm:px-6 py-20 px-6">
 
-        <div className="w-[360px]">
+        <div className="w-full max-w-sm sm:max-w-md">
 
           <h2 className="text-2xl font-semibold text-center mb-2">
             Sign In
           </h2>
 
-          <p className="text-center text-gray-400 text-sm mb-6">
+          <p className="text-center text-gray-400 text-sm mb-4 sm:mb-6">
             Sign in with your assigned email and password
           </p>
 
@@ -126,62 +128,61 @@ const isAdminEmail = (candidateEmail) => {
 
            <label className="text-sm text-gray-600">User Name</label>
 
-<div className="relative">
-  <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+            <div className="relative">
+              <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
 
-  <input
-    type="email"
-    placeholder="Enter your email"
-    className={`w-full pl-10 mt-1 mb-1 px-4 py-2 rounded-full outline-none focus:ring-2
-      ${errors.email 
-        ? "border border-red-500 bg-red-50 focus:ring-red-400"
-        : "bg-gray-200 focus:ring-blue-400"
-      }`}
-    value={email}
-    onChange={(e) => setEmail(e.target.value.toLowerCase())}
-  />
-</div>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className={`w-full pl-10 mt-1 mb-1 px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base
+                  ${errors.email 
+                    ? "border border-red-500 bg-red-50 focus:ring-red-400"
+                    : "bg-gray-200 focus:ring-blue-400"
+                  }`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value.toLowerCase())}
+              />
+            </div>
 
-{errors.email && (
-  <p className="text-red-500 text-xs mb-2">{errors.email}</p>
-)}
+            {errors.email && (
+              <p className="text-red-500 text-xs mb-2">{errors.email}</p>
+            )}
 
             {/* PASSWORD */}
             <label className="text-sm text-gray-600">Password</label>
+              <div className="relative">
+                <FaLock className="absolute left-3 top-3 text-gray-400" />
 
-<div className="relative">
-  <FaLock className="absolute left-3 top-3 text-gray-400" />
+                <input
+                  type={show ? "text" : "password"}
+                  placeholder="Enter password"
+                  className={`w-full pl-10 mt-1 mb-1 px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base
+                    ${errors.password 
+                      ? "border border-red-500 bg-red-50 focus:ring-red-400"
+                      : "bg-gray-200 focus:ring-blue-400"
+                    }`}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-  <input
-    type={show ? "text" : "password"}
-    placeholder="Enter password"
-    className={`w-full pl-10 pr-10 mt-1 mb-1 px-4 py-2 rounded-full outline-none focus:ring-2
-      ${errors.password 
-        ? "border border-red-500 bg-red-50 focus:ring-red-400"
-        : "bg-gray-200 focus:ring-blue-400"
-      }`}
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-  />
+                <span
+                  onClick={() => setShow(!show)}
+                  className="absolute right-4 top-3 cursor-pointer text-gray-500"
+                >
+                  {show ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
 
-  <span
-    onClick={() => setShow(!show)}
-    className="absolute right-4 top-3 cursor-pointer text-gray-500"
-  >
-    {show ? <FaEyeSlash /> : <FaEye />}
-  </span>
-</div>
-
-{errors.password && (
-  <p className="text-red-500 text-xs mb-2">{errors.password}</p>
-)}
+              {errors.password && (
+                <p className="text-red-500 text-xs mb-2">{errors.password}</p>
+              )}
             {/* FORGOT */}
             <p className="text-xs text-right text-green-500 mb-4 cursor-pointer">
               Forgot password?
             </p>
 
             {/* LOGIN BUTTON */}
-            <button className="w-full py-2 rounded-full text-white font-medium bg-gradient-to-r from-blue-500 to-green-500 hover:scale-105 transition shadow-lg">
+            <button className="w-full py-2 sm:py-2.5 text-sm sm:text-base rounded-full text-white font-medium bg-gradient-to-r from-blue-500 to-green-500 hover:scale-105 transition shadow-lg">
               Login
             </button>
 

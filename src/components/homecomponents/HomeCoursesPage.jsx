@@ -8,9 +8,6 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import Footer from "../../pages/Footer";
 
-// import {  useEffect } from "react";
-// import { catalog } from "@/lib/catalog";
-// import { getCourses } from "@/utils/storage";
 
 export default function HomeCoursesPage() {
   const [tab, setTab] = useState("All");
@@ -32,7 +29,6 @@ export default function HomeCoursesPage() {
   const featureTabs = ["Popular", "New", "Advanced"];
 
   // 🔥 ARROW VISIBILITY LOGIC
-  // const showLeft = (swiper) => swiper?.activeIndex > 0;
   const showLeft = (swiper) => {
   if (!swiper) return false;
   return swiper.activeIndex > 0;
@@ -47,22 +43,9 @@ export default function HomeCoursesPage() {
   return swiper.activeIndex < totalSlides - perView;
 };
 
-// const [courses, setCourses] = useState([]);
-
-// useEffect(() => {
-//   const adminCourses = getCourses();
-
-//   const activeAdmin = adminCourses.filter(
-//     (c) => c.status === "Active"
-//   );
-
-//   // 🔥 merge catalog + admin
-//   setCourses([...catalog, ...activeAdmin]);
-
-// }, []);
 
   return (
-    <div className="pt-10 px-6 max-w-7xl mx-auto space-y-10">
+    <div className="pt-6 sm:pt-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 sm:space-y-10">
 
       {/* 🔗 BREADCRUMB */}
       <p className="text-sm text-gray-500 -mt-2">
@@ -71,7 +54,7 @@ export default function HomeCoursesPage() {
 
       {/* 🧠 HEADING */}
       <div>
-        <h1 className="text-4xl font-bold mb-2">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
           Discover Top Courses to Boost Your Career 
         </h1>
         <p className="text-gray-500">
@@ -106,7 +89,7 @@ export default function HomeCoursesPage() {
           {showLeft(catSwiper) && (
             <button
               onClick={() => catSwiper.slidePrev()}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border w-10 h-10 flex items-center justify-center rounded-full shadow hover:bg-gray-100"
+              className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white border w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full shadow hover:bg-gray-100"
               // className="absolute left-[-12px] top-1/2 -translate-y-1/2 z-10 bg-white w-9 h-9 flex items-center justify-center rounded-full shadow"
             >
               ❮
@@ -117,7 +100,7 @@ export default function HomeCoursesPage() {
           {showRight(catSwiper) && (
             <button
               onClick={() => catSwiper.slideNext()}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border w-10 h-10 flex items-center justify-center rounded-full shadow hover:bg-gray-100"
+              className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white border w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full shadow hover:bg-gray-100"
               // className="absolute right-[-12px] top-1/2 -translate-y-1/2 z-10 bg-white w-9 h-9 flex items-center justify-center rounded-full shadow"
             >
               ❯
@@ -131,8 +114,13 @@ export default function HomeCoursesPage() {
           onSlideChange={() => {
             forceUpdate((n) => n + 1); // 🔥 re-render
           }}
-            spaceBetween={20}
-            slidesPerView={4}
+             spaceBetween={20}
+              breakpoints={{
+                0: { slidesPerView: 1.2 },
+                480: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
+                1024: { slidesPerView: 4 },
+              }}
           >
             {catalog
               .filter((c) => tab === "All" || c.category === tab)
@@ -141,13 +129,6 @@ export default function HomeCoursesPage() {
                   <CourseCard course={c} />
                 </SwiperSlide>
               ))}
-              {/* {courses
-  .filter((c) => tab === "All" || c.category === tab)
-  .map((c) => (
-    <SwiperSlide key={c.id}>
-      <CourseCard course={c} />
-    </SwiperSlide>
-  ))} */}
           </Swiper>
 
         </div>
@@ -168,7 +149,7 @@ export default function HomeCoursesPage() {
           {showLeft(trendSwiper) && (
             <button
               onClick={() => trendSwiper.slidePrev()}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border w-10 h-10 flex items-center justify-center rounded-full shadow hover:bg-gray-100"
+              className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white border w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full shadow hover:bg-gray-100"
               // className="absolute left-[-12px] top-1/2 -translate-y-1/2 z-10 bg-white w-9 h-9 flex items-center justify-center rounded-full shadow"
             >
               ❮
@@ -178,7 +159,7 @@ export default function HomeCoursesPage() {
           {showRight(trendSwiper) && (
             <button
               onClick={() => trendSwiper.slideNext()}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border w-10 h-10 flex items-center justify-center rounded-full shadow hover:bg-gray-100"
+              className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white border w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full shadow hover:bg-gray-100"
               // className="absolute right-[-12px] top-1/2 -translate-y-1/2 z-10 bg-white w-9 h-9 flex items-center justify-center rounded-full shadow"
             >
               ❯
@@ -192,18 +173,18 @@ export default function HomeCoursesPage() {
               forceUpdate((n) => n + 1);
             }}
             spaceBetween={20}
-            slidesPerView={4}
+            breakpoints={{
+              0: { slidesPerView: 1.2 },
+              480: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
+            }}
           >
             {catalog.slice(0, 8).map((c) => (
               <SwiperSlide key={c.id}>
                 <CourseCard course={c} />
               </SwiperSlide>
             ))}
-            {/* {courses.slice(0, 8).map((c) => (
-  <SwiperSlide key={c.id}>
-    <CourseCard course={c} />
-  </SwiperSlide>
-))} */}
           </Swiper>
 
         </div>
@@ -224,7 +205,7 @@ export default function HomeCoursesPage() {
         </div>
 
         {/* TABS */}
-        <div className="flex gap-6 border-b mt-4 pb-2">
+        <div className="flex gap-6 border-b mt-4 pb-2 overflow-x-auto">
           {featureTabs.map((t) => (
             <button
               key={t}
@@ -246,7 +227,7 @@ export default function HomeCoursesPage() {
           {showLeft(featSwiper) && (
             <button
               onClick={() => featSwiper.slidePrev()}
-              className="absolute left-[-12px] top-1/2 -translate-y-1/2 z-10 bg-white w-9 h-9 flex items-center justify-center rounded-full shadow"
+              className="absolute left-[-12px] top-1/2 -translate-y-1/2 z-10 bg-white w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full shadow"
             >
               ❮
             </button>
@@ -255,7 +236,7 @@ export default function HomeCoursesPage() {
           {showRight(featSwiper) && (
             <button
               onClick={() => featSwiper.slideNext()}
-              className="absolute right-[-12px] top-1/2 -translate-y-1/2 z-10 bg-white w-9 h-9 flex items-center justify-center rounded-full shadow"
+              className="absolute right-[-12px] top-1/2 -translate-y-1/2 z-10 bg-white w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full shadow"
             >
               ❯
             </button>
@@ -268,7 +249,12 @@ export default function HomeCoursesPage() {
               forceUpdate((n) => n + 1);
             }}
             spaceBetween={20}
-            slidesPerView={4}
+            breakpoints={{
+              0: { slidesPerView: 1.2 },
+              480: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
+            }}
           >
             {catalog
               .filter((c) =>
@@ -281,17 +267,6 @@ export default function HomeCoursesPage() {
                   <CourseCard course={c} />
                 </SwiperSlide>
               ))}
-              {/* {courses
-  .filter((c) =>
-    featureTab === "Advanced"
-      ? ["Advanced", "Intermediate"].includes(c.level)
-      : c.tag === featureTab
-  )
-  .map((c) => (
-    <SwiperSlide key={c.id}>
-      <CourseCard course={c} />
-    </SwiperSlide>
-  ))} */}
           </Swiper>
 
         </div>

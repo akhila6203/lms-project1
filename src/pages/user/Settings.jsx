@@ -151,9 +151,9 @@ const handleAvatarChange = (e) => {
 
   return (
     <div>
-    <div  className="flex gap-6 max-w-7xl mx-auto p-4">
+    <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 max-w-7xl mx-auto px-4 sm:px-6 py-4">
 
-      <div className="w-[240px] space-y-2">
+      <div className="w-full lg:w-[240px] space-y-2 flex lg:block overflow-x-auto lg:overflow-visible">
   {[
     { id: "profile", label: "Profile", icon: User },
     { id: "learning", label: "My Learning", icon: User },
@@ -172,7 +172,7 @@ const handleAvatarChange = (e) => {
           setActiveTab(item.id);
           navigate(`/settings?tab=${item.id}`);
         }}
-        className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg
+        className={`min-w-[140px] lg:w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 rounded-lg whitespace-nowrap
           ${activeTab === item.id
             ? "bg-primary text-white"
             : "hover:bg-gray-100"
@@ -185,7 +185,7 @@ const handleAvatarChange = (e) => {
   })}
 </div>   {/* ✅ CLOSE SIDEBAR HERE */}
 
-      <div className="flex-1 space-y-6">
+      <div className="flex-1 space-y-4 sm:space-y-6">
 
          {activeTab === "profile" && (
       //  <TabsContent value="profile">
@@ -198,7 +198,7 @@ const handleAvatarChange = (e) => {
             <CardContent className="space-y-5">
 
              
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <Avatar className="h-16 w-16">
                   {user.avatar && <AvatarImage src={user.avatar} />}
                   <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white font-bold">
@@ -303,7 +303,7 @@ const handleAvatarChange = (e) => {
           </Button>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {wishlistItems.map((c) => (
             <CourseCard key={c.id} course={c} />
           ))}
@@ -314,8 +314,7 @@ const handleAvatarChange = (e) => {
 // </TabsContent>
     )}
 
-    {activeTab === "cart" && (
-      // <TabsContent value="cart">
+    {/* {activeTab === "cart" && (
   <Card className="border-border/60">
     <CardHeader>
       <CardTitle className="flex items-center gap-2">
@@ -343,10 +342,9 @@ const handleAvatarChange = (e) => {
     </CardContent>
   </Card>
 // </TabsContent>
-    )}
+    )} */}
 
     {activeTab === "appearance" && (
-      // <TabsContent value="appearance">
   <Card className="border-border/60">
     <CardHeader>
       <CardTitle>Appearance</CardTitle>
@@ -418,7 +416,7 @@ const handleAvatarChange = (e) => {
       ].map((row, i) => (
         <div
           key={row.t}
-          className="flex items-center justify-between p-5"
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 sm:p-5"
         >
           <div>
             <p className="text-sm font-medium">{row.t}</p>

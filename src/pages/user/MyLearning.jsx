@@ -67,13 +67,13 @@ export default function MyLearningPage() {
   };
 
   return (
-    <div className="space-y-8 px-6 py-4 md:px-10">
+    <div className="space-y-6 sm:space-y-8 sm:px-2 md:px-2 py-4 sm:py-6">
       <div>
-        <h1 className="text-4xl font-semibold">Welcome back, {user?.name?.split(" ")[0] || "Student"} 👋</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold">Welcome back, {user?.name?.split(" ")[0] || "Student"} 👋</h1>
         <p className="mt-1 text-sm text-muted-foreground">Pick up where you left off.</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         <Card className="p-4"><p className="text-xs text-muted-foreground">Enrolled</p><p className="text-3xl font-semibold">{stats.enrolled}</p></Card>
         <Card className="p-4"><p className="text-xs text-muted-foreground">Completed</p><p className="text-3xl font-semibold">{stats.completed}</p></Card>
         <Card className="p-4"><p className="text-xs text-muted-foreground">Hours learned</p><p className="text-3xl font-semibold">{stats.hoursLearned}</p></Card>
@@ -81,7 +81,7 @@ export default function MyLearningPage() {
       </div>
 
       <Card className="overflow-x-auto p-0">
-        <table className="w-full text-sm">
+        <table className="w-full min-w-[700px] text-xs sm:text-sm">
           <thead className="bg-secondary/60 text-left">
             <tr>
               <th className="px-4 py-3">Course</th>
@@ -104,7 +104,7 @@ export default function MyLearningPage() {
                 <tr key={row.courseId} className="border-t">
                   <td className="px-4 py-3">{row.title}</td>
                   <td className="px-4 py-3">
-                    <div className="w-44">
+                    <div className="w-32 sm:w-40 md:w-44">
                       <div className="h-2 w-full rounded-full bg-gray-200">
                         <div className="h-2 rounded-full bg-purple-600" style={{ width: `${row.percent}%` }} />
                       </div>
@@ -119,7 +119,7 @@ export default function MyLearningPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <Button size="sm" variant="outline" onClick={() => navigate(`/courses/${row.courseId}`, { state: { from: "/my-learning" } })}>
                         View
                       </Button>
@@ -157,13 +157,13 @@ export default function MyLearningPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Popular Courses</h2>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
           {catalog.slice(4, 8).map((c) => (
             <Card key={c.id} className="overflow-hidden p-0">
-              <img src={c.thumbnail} alt={c.title} className="h-32 w-full object-cover" />
+              <img src={c.thumbnail} alt={c.title} className="h-28 sm:h-32 w-full object-cover" />
               <div className="p-3">
                 <p className="text-sm font-medium line-clamp-2">{c.title}</p>
-                <Button size="sm" variant="outline" className="mt-2" onClick={() => navigate(`/courses/${c.id}`, { state: { from: "/my-learning" } })}>
+                <Button className="text-xs sm:text-sm" variant="outline" className="mt-2" onClick={() => navigate(`/courses/${c.id}`, { state: { from: "/my-learning" } })}>
                   View course
                 </Button>
               </div>
