@@ -25,9 +25,29 @@ export default function AdminCourses() {
 
   const [openMenuId, setOpenMenuId] = useState(null);
 
+  // useEffect(() => {
+  //   setCourses(getCourses());
+  // }, []);
   useEffect(() => {
-    setCourses(getCourses());
-  }, []);
+  const data = getCourses();
+
+  if (data && data.length > 0) {
+    setCourses(data);
+  } else {
+    setCourses([
+      {
+        id: 1,
+        title: "React Course",
+        status: "Active",
+        instructor: "Akhila",
+        category: "Web",
+        students: 10,
+        videos: [],
+      },
+    ]);
+  }
+}, []);
+ 
 
   // 🔍 SEARCH
   let filtered = courses.filter((c) =>
