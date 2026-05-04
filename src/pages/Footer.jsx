@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Github, Twitter, Linkedin, Mail } from "lucide-react";
+import logo from "../assets/photos/logo.png"
 
 export default function Footer() {
   return (
@@ -11,15 +12,11 @@ export default function Footer() {
         {/* LOGO + DESC */}
         <div className="col-span-2 md:col-span-1">
           <Link to="/" className="flex items-center gap-2">
-            <div
-              className="flex h-9 w-9 items-center justify-center rounded-lg shadow-md "
-              style={{ background: "var(--gradient-primary)" }}
-            >
-              <span className="text-primary-foreground text-sm font-bold text-purple-700">
-                L
-              </span>
-            </div>
-            <span className="text-base font-semibold">LMS</span>
+            <img
+              src={logo}
+              alt="LMS"
+              className="h-10 sm:h-10 w-auto object-contain"
+            />
           </Link>
 
           <p className="mt-3 text-sm text-muted-foreground">

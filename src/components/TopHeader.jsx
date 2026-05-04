@@ -30,6 +30,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import logo from "../assets/photos/logo.png"
+
 
 const notifications = [
   { text: "New lead from website form", time: "2m ago", unread: true },
@@ -153,11 +155,22 @@ if (path.startsWith("/courses/") && path !== "/courses/create") {
               onClick={() => navigate("/dashboard")}
               className="flex items-center gap-2"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-black text-white shadow-sm">
-                <Zap className="h-4 w-4" />
-              </div>
-              <span className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight">LMS</span>
+              <img
+                src={logo}
+                alt="LMS"
+                className="h-8 sm:h-10 md:h-12 w-auto object-contain"
+              />
+
             </button>
+            // <button
+            //   onClick={() => navigate("/dashboard")}
+            //   className="flex items-center gap-2"
+            // >
+            //   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-black text-white shadow-sm">
+            //     <Zap className="h-4 w-4" />
+            //   </div>
+            //   <span className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight">LMS</span>
+            // </button>
           ) : (
             <h1 className="text-xl font-semibold text-foreground">{title}</h1>
           )}

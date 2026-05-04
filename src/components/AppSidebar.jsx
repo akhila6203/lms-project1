@@ -11,6 +11,8 @@ import {
   Folder,
 } from "lucide-react";
 
+import logo from "../assets/photos/logo.png"
+
 // ✅ MENU FIRST DEFINE
 const adminMenu = [
   { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
@@ -28,30 +30,31 @@ const userMenu = [
   { name: "Settings", path: "/settings", icon: Settings },
 ];
 
-export function AppSidebar() {
+export function AppSidebar({ collapsed, setCollapsed }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const menu = user?.role === "admin" ? adminMenu : userMenu;
-  const [collapsed, setCollapsed] = useState(false);
+  // const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
   return (
-    //  <aside
-    //   className={`sticky top-0 h-screen flex flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300 ${
-    //    collapsed ? "w-[72px]" : "w-[260px]"
-    //    }`}>
-//     <aside
-//   className={`sticky top-0 h-screen flex flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300 ${
-//     collapsed ? "w-[72px]" : "w-[260px]"
-//   }`}
-// >
- <aside
-  className={`fixed left-0 top-0 h-screen flex flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300 z-50 ${
-    collapsed ? "w-[72px]" : "w-[260px]"
-  }`}
-> 
+
+      <aside
+        className={`fixed left-0 top-0 h-screen flex flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300 z-50 ${
+          collapsed ? "w-[72px]" : "w-[260px]"
+        }`}
+      > 
   
      {/* LOGO */}
-      <div className="h-16 flex items-center px-5 border-b border-sidebar-border gap-3">
+     <div className="h-16 flex items-center px-5 border-b border-sidebar-border gap-3">
+        <img
+          src={logo}
+          alt="LMS"
+          className={`w-auto object-contain invert brightness-0 transition-all duration-300 
+            ${collapsed ? "h-10 mx-auto" : "h-12 sm:h-10"}`}
+        />
+
+      </div>
+      {/* <div className="h-16 flex items-center px-5 border-b border-sidebar-border gap-3">
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
           <Zap className="w-4 h-4 text-white" />
         </div>
@@ -61,8 +64,9 @@ export function AppSidebar() {
             LMS
           </span>
         )}
-      </div>
+      </div> */}
 
+      
       {/* ✅ MENU (YOUR CODE PLACE HERE) */}
       <nav className="flex-1 py-4 px-3 overflow-y-auto">
         {menu.map((item) => {

@@ -29,6 +29,8 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { getCart, getWishlist } from "@/utils/userStore";
 
+import logo from "../../assets/photos/logo.png"
+
 const notifications = [
   { text: "New lead from website form", time: "2m ago", unread: true },
   { text: "Deal 'Enterprise Plan' moved to Negotiation", time: "1h ago", unread: true },
@@ -106,12 +108,22 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
     
         {/* LOGO */}
-        <h1
+        {/* <h1
           onClick={() => navigate("/")}
           className="text-2xl font-bold text-purple-600 cursor-pointer"
         >
           LMS
-        </h1>
+        </h1> */}
+        <div
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 cursor-pointer"
+        >
+          <img
+            src={logo}
+            alt="LMS"
+            className="h-10 sm:h-10 md:h-12 w-auto object-contain"
+          />
+        </div>
         
 
         {/* SEARCH */}
