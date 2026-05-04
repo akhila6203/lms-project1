@@ -120,7 +120,7 @@ export default function MaterialsPage() {
       {/* HEADER */}
       <div className="flex justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">Materials</h1>
+          {/* <h1 className="text-2xl font-semibold">Materials</h1> */}
           <p className="text-sm text-gray-500">
             Central library of all learning resources across your courses.
           </p>
@@ -189,43 +189,32 @@ export default function MaterialsPage() {
       {/* FILTER */}
       <Card>
         <CardContent className="p-4 flex justify-between items-center gap-20">
-          {/* <Tabs value={tab} onValueChange={setTab}>
-            <TabsList>
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="PDF">PDFs</TabsTrigger>
-              <TabsTrigger value="Doc">Docs</TabsTrigger>
-              <TabsTrigger value="Slides">Slides</TabsTrigger>
-              <TabsTrigger value="Video">Videos</TabsTrigger>
-              <TabsTrigger value="Image">Images</TabsTrigger>
-              <TabsTrigger value="Link">Links</TabsTrigger>
-            </TabsList>
-          </Tabs> */}
+          
           <Tabs value={tab} onValueChange={setTab}>
-  <TabsList className="bg-gray-100 p-1 rounded-xl flex gap-1">
+            <TabsList className="bg-gray-100 p-1 rounded-xl flex gap-1">
+              {[
+                { label: "All", value: "all" },
+                { label: "PDFs", value: "PDF" },
+                { label: "Docs", value: "Doc" },
+                { label: "Slides", value: "Slides" },
+                { label: "Videos", value: "Video" },
+                { label: "Images", value: "Image" },
+                { label: "Links", value: "Link" },
+              ].map((t) => (
+                <TabsTrigger
+                  key={t.value}
+                  value={t.value}
+                  className="px-4 py-2 rounded-lg text-sm transition-all
+                            data-[state=active]:bg-white
+                            data-[state=active]:text-black
+                            data-[state=active]:shadow-sm"
+                >
+                  {t.label}
+                </TabsTrigger>
+              ))}
 
-    {[
-      { label: "All", value: "all" },
-      { label: "PDFs", value: "PDF" },
-      { label: "Docs", value: "Doc" },
-      { label: "Slides", value: "Slides" },
-      { label: "Videos", value: "Video" },
-      { label: "Images", value: "Image" },
-      { label: "Links", value: "Link" },
-    ].map((t) => (
-      <TabsTrigger
-        key={t.value}
-        value={t.value}
-        className="px-4 py-2 rounded-lg text-sm transition-all
-                   data-[state=active]:bg-white
-                   data-[state=active]:text-black
-                   data-[state=active]:shadow-sm"
-      >
-        {t.label}
-      </TabsTrigger>
-    ))}
-
-  </TabsList>
-</Tabs>
+            </TabsList>
+          </Tabs>
 
           {/* <div className="flex gap-2"> */}
             <Input
@@ -254,8 +243,18 @@ export default function MaterialsPage() {
 
       {/* GRID */}
       <div className="grid grid-cols-4 gap-4">
-        {filtered.map((m) => (
+        {/* {filtered.map((m) => (
           <MaterialCard key={m.id} item={m} />
+        ))} */}
+        {filtered.map((m) => (
+          <MaterialCard
+            key={m.id}
+            item={m}
+            onDelete={(id) => {
+              setItems((prev) => prev.filter((i) => i.id !== id));
+              toast("Material deleted");
+            }}
+          />
         ))}
       </div>
     </div>
@@ -264,7 +263,7 @@ export default function MaterialsPage() {
 
 /* ---------------- CARD ---------------- */
 
-function MaterialCard({ item }) {
+function MaterialCard({ item, onDelete }) {
   const meta = typeMeta[item.type];
   const Icon = meta.icon;
 
@@ -276,34 +275,60 @@ function MaterialCard({ item }) {
           <div className={`p-3 rounded-xl ring-1 ${meta.ring} ${meta.tint}`}>
             <Icon className="h-5 w-5" />
           </div>
+
           <DropdownMenu >
-  <DropdownMenuTrigger>
-    <MoreVertical className="cursor-pointer" />
-  </DropdownMenuTrigger>
+            <DropdownMenuTrigger>
+              <MoreVertical className="cursor-pointer" />
+            </DropdownMenuTrigger>
 
-  <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end">
 
-    <DropdownMenuItem>
-      <Eye className="mr-2 h-4 w-4" /> Preview
-    </DropdownMenuItem>
+            {/* <DropdownMenuItem>
+              <Eye className="mr-2 h-4 w-4" /> Preview
+            </DropdownMenuItem> */}
+            <DropdownMenuItem
+              onClick={() => {
+                const win = window.open();
+                win.document.write(`
+                  <h1>${item.title}</h1>
+                  <p>Course: ${item.course}</p>
+                  <p>Type: ${item.type}</p>
+                  <p>Size: ${item.size}</p>
+                `);
+              }}>
+              <Eye className="mr-2 h-4 w-4" /> Preview
+            </DropdownMenuItem>
 
-    <DropdownMenuItem>
-      <Download className="mr-2 h-4 w-4" /> Download
-    </DropdownMenuItem>
+            {/* <DropdownMenuItem>
+              <Download className="mr-2 h-4 w-4" /> Download
+            </DropdownMenuItem> */}
+            <DropdownMenuItem
+              onClick={() => {
+                const blob = new Blob([item.title], { type: "text/plain" });
+                const url = URL.createObjectURL(blob);
 
-    <DropdownMenuSeparator />
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = item.title;
+                a.click();
+              }}>
+              <Download className="mr-2 h-4 w-4" /> Download
+            </DropdownMenuItem>
 
-    <DropdownMenuItem
-      className="text-red-500"
-      onClick={() => {
-        toast("Deleted");
-      }}
-    >
-      <Trash2 className="mr-2 h-4 w-4" /> Delete
-    </DropdownMenuItem>
+            <DropdownMenuSeparator />
 
-  </DropdownMenuContent>
-</DropdownMenu>
+            <DropdownMenuItem
+              className="text-red-500"
+              // onClick={() => {
+              //   toast("Deleted");
+              // }}
+              onClick={() => onDelete(item.id)}
+            >
+              <Trash2 className="mr-2 h-4 w-4" /> Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        
         </div>
 
         <h3 className="mt-3 font-medium">{item.title}</h3>

@@ -120,7 +120,7 @@ export default function Students() {
 
       <div className="flex justify-between items-start flex-wrap gap-4">
           <div>
-            <h1 className="text-3xl font-semibold">Students</h1>
+            {/* <h1 className="text-3xl font-semibold">Students</h1> */}
             <p className="text-gray-500 text-sm">
               Track every learner's progress across your platform.
             </p>

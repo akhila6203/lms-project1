@@ -150,36 +150,37 @@ const isAdminEmail = (candidateEmail) => {
 
             {/* PASSWORD */}
             <label className="text-sm text-gray-600">Password</label>
-              <div className="flex items-center bg-gray-200 rounded-full px-3 mt-1 mb-1">
-                <FaLock className="text-gray-400 text-sm mr-2" />
+            <div
+              className={`relative flex items-center rounded-full px-3 mt-1 mb-8
+                ${errors.password
+                  ? "border border-red-500 bg-red-50"
+                  : "bg-gray-200"
+                }`}
+            >
+              <FaLock className="text-gray-400 text-sm mr-2" />
 
-                <input
-                  type={show ? "text" : "password"}
-                  placeholder="Enter password"
-                  className={`w-full bg-transparent outline-none text-sm sm:text-base py-2.5
-                    ${errors.password 
-                      ? "border border-red-500 bg-red-50 focus:ring-red-400"
-                      : "bg-gray-200 focus:ring-blue-400"
-                    }`}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+              <input
+                type={show ? "text" : "password"}
+                placeholder="Enter password"
+                className="w-full bg-transparent outline-none text-sm sm:text-base py-2.5"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-                <span
-                  onClick={() => setShow(!show)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
-                >
-                  {show ? <FaEyeSlash /> : <FaEye />}
-                </span>
-              </div>
-
+              <span
+                onClick={() => setShow(!show)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
+              >
+                {show ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
               {errors.password && (
-                <p className="text-red-500 text-xs mb-2">{errors.password}</p>
+                <p className="text-red-500 text-xs mb-4">{errors.password}</p>
               )}
             {/* FORGOT */}
-            <p className="text-xs text-right text-green-500 mb-4 cursor-pointer">
+            {/* <p className="text-xs text-right text-green-500 mb-4 cursor-pointer">
               Forgot password?
-            </p>
+            </p> */}
 
             {/* LOGIN BUTTON */}
             <button className="w-full py-2 sm:py-2.5 text-sm sm:text-base rounded-full text-white font-medium bg-gradient-to-r from-blue-500 to-green-500 hover:scale-105 transition shadow-lg">

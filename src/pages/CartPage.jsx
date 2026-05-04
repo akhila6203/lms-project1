@@ -5,6 +5,7 @@ import { getCart, toggleCart } from "@/utils/userStore";
 
 import MainLayout from "@/layouts/MainLayout";
 import UserLayout from "@/layouts/UserLayout";
+import Footer from "./Footer";
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -121,7 +122,7 @@ export default function CartPage() {
             </div>
 
             {/* RIGHT */}
-            <div className="border p-4 rounded-xl h-fit space-y-3 mt-4 lg:mt-0">
+            <div className="border p-4 rounded-xl h-fit space-y-3 mt-8 lg:mt-12">
               <h3 className="font-semibold text-lg">Price Details</h3>
 
               <div className="flex justify-between text-sm">
@@ -219,101 +220,8 @@ export default function CartPage() {
           </div>
         )}
       </div>
-    </Wrapper>
+      <Footer/>
+    </Wrapper>   
   );
 }
 
-
-// import { useNavigate } from "react-router-dom";
-// import { catalog } from "@/lib/catalog";
-// import { getCart } from "@/utils/userStore";
-// import { Button } from "@/components/ui/button";
-
-//     import MainLayout from "@/layouts/MainLayout";
-//     import UserLayout from "@/layouts/UserLayout"; 
-
-// export default function CartPage() {
-
-// const user = JSON.parse(localStorage.getItem("user"));
-
-// const Wrapper = user ? UserLayout : MainLayout;
-
-//   const navigate = useNavigate();
-
-//   const cartIds = getCart();
-//   const cartItems = catalog.filter(c => cartIds.includes(c.id));
-
-//   // 💰 PRICE LOGIC (dummy)
-//   const total = cartItems.reduce((acc, c) => acc + (c.price || 1000), 0);
-//   const discount = Math.floor(total * 0.2);
-//   const final = total - discount;
-
-//   return (
-//     <Wrapper>
-//     <div className="max-w-7xl mx-auto p-6 grid grid-cols-3 gap-6">
-
-//       {/* LEFT - ITEMS */}
-//       <div className="col-span-2 space-y-4">
-//         <h2 className="text-2xl font-bold">Billing Page</h2>
-
-//         {cartItems.length === 0 ? (
-//           <p>Cart is empty</p>
-//         ) : (
-//           cartItems.map((c) => (
-//             <div key={c.id} className="border p-4 rounded-xl flex gap-4">
-
-//               {/* IMAGE */}
-//               <img
-//                 src={c.thumbnail}
-//                 className="w-32 h-20 object-cover rounded"
-//               />
-
-//               {/* DETAILS */}
-//               <div className="flex-1">
-//                 <h3 className="font-semibold">{c.title}</h3>
-//                 <p className="text-sm text-gray-500">{c.category}</p>
-
-//                 {/* 🎬 VIDEOS */}
-//                 <p className="text-xs mt-2 text-muted-foreground">
-//                   {c.videos?.length || 0} videos
-//                 </p>
-//               </div>
-
-//               {/* PRICE */}
-//               <div className="font-bold">
-//                 ₹ {c.price || 1000}
-//               </div>
-//             </div>
-//           ))
-//         )}
-//       </div>
-
-//       {/* RIGHT - BILL */}
-//       <div className="border p-4 rounded-xl h-fit space-y-3">
-//         <h3 className="font-semibold text-lg">Price Details</h3>
-
-//         <div className="flex justify-between text-sm">
-//           <span>Total</span>
-//           <span>₹ {total}</span>
-//         </div>
-
-//         <div className="flex justify-between text-sm text-green-600">
-//           <span>Discount</span>
-//           <span>- ₹ {discount}</span>
-//         </div>
-
-//         <hr />
-
-//         <div className="flex justify-between font-bold">
-//           <span>Final</span>
-//           <span>₹ {final}</span>
-//         </div>
-
-//         <Button className="w-full mt-3">
-//           Proceed to Buy
-//         </Button>
-//       </div>
-//     </div>
-//     </Wrapper>
-//   );
-// }
